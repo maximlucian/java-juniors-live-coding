@@ -21,10 +21,10 @@ public class OrderUtil {
     // retrieve orders from csv lines
     public static List<Order> parseCsvLines(final List<String> lines) {
 //                    "O-1001,C-001,2025-10-01, USB-C Cable ,Accessories,9.99,2",
-        List<Order> orders = Collections.singletonList(new Order());
+        List<Order> orders = new ArrayList<>();
         try(Scanner scanner = new Scanner(new InputStreamReader((InputStream) CSV_ORDER))) {
             while(scanner.hasNextLine()) {
-            orders.add((Order) parseCsvLines(Collections.singletonList(scanner.nextLine())));
+            orders.add((Order) parseCsvLines(scanner.nextLine()));
             }
         }
         return orders;
