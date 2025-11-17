@@ -20,11 +20,10 @@ public class OrderUtil {
 
     // retrieve orders from csv lines
     public static List<Order> parseCsvLines(final List<String> lines) {
-//                    "O-1001,C-001,2025-10-01, USB-C Cable ,Accessories,9.99,2",
         List<Order> orders = new ArrayList<>();
         try(Scanner scanner = new Scanner(new InputStreamReader((InputStream) CSV_ORDER))) {
             while(scanner.hasNextLine()) {
-            orders.add((Order) parseCsvLines(scanner.nextLine()));
+            orders.add((Order) parseCsvLines(Collections.singletonList(scanner.nextLine())));
             }
         }
         return orders;
@@ -33,7 +32,10 @@ public class OrderUtil {
     // calculate revenue by day
     // revenue = unitPrice * quantity   lambda
     public static Map<LocalDate, BigDecimal> revenueByDay(final List<Order> orders) {
-
+        int result = orders.stream()
+                .reduce(1, (unitPrice, quantity) -> {
+                    return unitPrice * quantity;
+                }).intValue();
         return Collections.emptyMap();
     }
 
