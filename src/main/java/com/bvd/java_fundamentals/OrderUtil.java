@@ -3,10 +3,7 @@ package com.bvd.java_fundamentals;
 import com.bvd.java_fundamentals.model.Order;
 import com.bvd.java_fundamentals.StoreAnalytics;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
@@ -20,22 +17,30 @@ public class OrderUtil {
 
     // retrieve orders from csv lines
     public static List<Order> parseCsvLines(final List<String> lines) {
-        List<Order> orders = new ArrayList<>();
-        try(Scanner scanner = new Scanner(new InputStreamReader((InputStream) CSV_ORDER))) {
-            while(scanner.hasNextLine()) {
-            orders.add((Order) parseCsvLines(Collections.singletonList(scanner.nextLine())));
+        List<String> orders = new ArrayList<>();
+
+        final String COMMA_DELIMITER = ", ";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(String.valueOf(StoreAnalytics.CSV_ORDER)))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(COMMA_DELIMITER);
+                orders.add(String.valueOf(Arrays.asList(values)));
             }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return orders;
+
     }
 
     // calculate revenue by day
     // revenue = unitPrice * quantity   lambda
     public static Map<LocalDate, BigDecimal> revenueByDay(final List<Order> orders) {
-        int result = orders.stream()
-                .reduce(1, (unitPrice, quantity) -> {
-                    return unitPrice * quantity;
-                }).intValue();
+        int result = orders.stream().reduce(1, (unitPrice, quantity) -> {
+            return unitPrice * quantity;
+        }).intValue();
         return Collections.emptyMap();
     }
 
