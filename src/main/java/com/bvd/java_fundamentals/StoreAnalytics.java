@@ -28,6 +28,8 @@ import static com.bvd.java_fundamentals.OrderUtil.topProductsByRevenue;
         * customersWithCategoryDiversity: get customers who ordered products from at least 2 categories
         * findFirstProductContaining: find the first product name containing a given substring (case-insensitive)
  */
+
+
 public class StoreAnalytics {
     public static final List<String> CSV_ORDER = List.of(
             "O-1001,C-001,2025-10-01, USB-C Cable ,Accessories,9.99,2",
