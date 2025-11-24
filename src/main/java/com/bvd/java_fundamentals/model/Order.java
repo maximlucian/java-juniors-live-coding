@@ -1,17 +1,28 @@
 package com.bvd.java_fundamentals.model;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
+
+import java.time.LocalDate;
 
 public class Order {
 
-    private String orderId;
-    public String customerId;
-    public String orderDate;
-    public String productName;
-    public String category;
-    public BigDecimal unitPrice;
-    public Integer quantity;
+    private final String orderId;
+    private final String customerId;
+    private final LocalDate orderDate;
+    private final String productName;
+    private final String category;
+    private final BigDecimal unitPrice;
+    private final int quantity;
+
+    public Order(String orderId, String customerId, LocalDate orderDate, String productName, String category, BigDecimal unitPrice, int quantity) {
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.orderDate = orderDate;
+        this.productName = productName;
+        this.category = category;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
+    }
 
     public String getOrderId() {
         return orderId;
@@ -21,7 +32,7 @@ public class Order {
         return customerId;
     }
 
-    public String getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
@@ -37,36 +48,7 @@ public class Order {
         return unitPrice;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public void setOderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
 }
